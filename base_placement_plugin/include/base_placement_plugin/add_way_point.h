@@ -26,10 +26,12 @@
 
 #include <rviz/properties/bool_property.h>
 #include <rviz/properties/string_property.h>
+#endif
+
 #include <base_placement_plugin/widgets/base_placement_widget.h>
 
 #include <base_placement_plugin/place_base.h>
-#include<base_placement_plugin/add_robot_base.h>
+#include <base_placement_plugin/add_robot_base.h>
 
 #include <QWidget>
 #include <QCursor>
@@ -37,10 +39,9 @@
 #include <QKeyEvent>
 #include <QHBoxLayout>
 #include <QTimer>
-#include <QtConcurrentRun>
+#include <QtConcurrent>
 #include <QFuture>
 
-#endif
 
 namespace rviz
 {

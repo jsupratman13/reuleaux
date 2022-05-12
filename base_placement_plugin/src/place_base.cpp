@@ -23,8 +23,8 @@
 #include <tf2/LinearMath/Vector3.h>
 
 
-#include<visualization_msgs/InteractiveMarker.h>
-#include<interactive_markers/interactive_marker_server.h>
+#include <visualization_msgs/InteractiveMarker.h>
+#include <interactive_markers/interactive_marker_server.h>
 
 
 PlaceBase::PlaceBase(QObject *parent)
@@ -144,7 +144,7 @@ bool PlaceBase::checkforRobotModel()
     {
       group_names_.clear();
       group_names_ = robot_model_->getJointModelGroupNames();
-      //ROS_INFO("Sending the robot groups list");
+      ROS_INFO("Sending the robot groups list");
       Q_EMIT sendGroupType_signal(group_names_);
       ROS_INFO("Please select your manipulator group. ");
       return true;
@@ -161,6 +161,7 @@ bool PlaceBase::loadRobotModel()
     return false;
   else
     robot_model_ = robot_model_loader.getModel();
+  return true;
 }
 
 void PlaceBase::getBasePoses(std::vector<geometry_msgs::Pose> base_poses)
@@ -227,7 +228,9 @@ void PlaceBase::createSpheres(std::multimap< std::vector< double >, std::vector<
         {
           std::vector<double> joint_soln;
           int nsolns = 0;
+  std::cout << "checkpoint2A" << std::endl;
           k.isIkSuccesswithTransformedBase(base_pose_at_arm, GRASP_POSES_[j], joint_soln, nsolns);
+  std::cout << "checkpoint2B" << std::endl;
           num_of_solns +=nsolns;
         }
 
@@ -240,15 +243,15 @@ void PlaceBase::createSpheres(std::multimap< std::vector< double >, std::vector<
 
   else{
 
-  //Determining color of spheres of 3d map
- for(std::multimap<std::vector<double>, std::vector<double> >::iterator it = basePoses.begin(); it!=basePoses.end();++it)
- {
-   float d = ((float(basePoses.count(it->first))- min_number)/ (max_number - min_number)) * 100;
-   if(d>1)
-   {
-     spColor.insert(std::pair< std::vector< double >, double >(it->first, double(d)));
-   }
- }
+    //Determining color of spheres of 3d map
+     for(std::multimap<std::vector<double>, std::vector<double> >::iterator it = basePoses.begin(); it!=basePoses.end();++it)
+     {
+       float d = ((float(basePoses.count(it->first))- min_number)/ (max_number - min_number)) * 100;
+       if(d>1)
+       {
+         spColor.insert(std::pair< std::vector< double >, double >(it->first, double(d)));
+       }
+     }
   }
  std::multiset<std::pair<double, std::vector<double> > > scoreWithSp;
  for(std::map<std::vector<double>, double>::iterator it = spColor.begin(); it !=spColor.end();++it )
@@ -308,7 +311,9 @@ double PlaceBase::calculateScoreForArmBase(std::vector<geometry_msgs::Pose> &gra
     {
       std::vector<double> joint_soln;
       int nsolns = 0;
+      std::cout << "checkpoint3" << std::endl;
       k.isIkSuccesswithTransformedBase(base_poses[i], grasp_poses[j], joint_soln, nsolns);
+      std::cout << "checkpoint4" << std::endl;
       num_of_solns +=nsolns;
     }
     float d = (float(num_of_solns)/float(grasp_poses.size()*8))*100;
@@ -429,7 +434,9 @@ bool PlaceBase::findbase(std::vector< geometry_msgs::Pose > grasp_poses)
         transformToRobotbase(PoseColFilter, robot_PoseColfilter);
         sd.associatePose(baseTrnsCol, grasp_poses, robot_PoseColfilter, res);
         ROS_INFO("Size of baseTrnsCol dataset: %lu", baseTrnsCol.size());
+        std::cout << "checkpoint1" << std::endl;
         createSpheres(baseTrnsCol, sphereColor, highScoreSp, true);
+        std::cout << "checkpoint2" << std::endl;
       }
 
       else
@@ -632,7 +639,6 @@ void PlaceBase::findBaseByPCA()
     pose_scores.push_back(new_base_pose);
 
   }
-
   double s = calculateScoreForArmBase(GRASP_POSES_, pose_scores);
   score_ = s;
   final_base_poses = pose_scores;

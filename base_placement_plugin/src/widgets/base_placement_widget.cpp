@@ -110,7 +110,7 @@ void BasePlacementWidget::showUnionMapFromUI()
 
 void BasePlacementWidget::getRobotGroups(std::vector<std::string> groups)
 {
-  //ROS_INFO("Getting the robot groups");
+  ROS_INFO("Getting the robot groups");
   int robot_group = groups.size();
 
   disconnect(ui_.combo_robotModel, SIGNAL(currentIndexChanged(int)), this, SLOT(selectedRobotGroup(int)));
@@ -677,6 +677,7 @@ void BasePlacementWidget::loadReachabilityFile()
     hdf5_dataset::Hdf5Dataset h5file(FILE);
     h5file.open();
     h5file.loadMapsFromDataset(pose_col_filter, sp, res);
+    res = 0.08;
 
 
     std::multimap< std::vector< double >, double > sphere_col;

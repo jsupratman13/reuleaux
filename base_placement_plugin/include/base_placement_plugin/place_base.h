@@ -1,3 +1,7 @@
+#ifndef PLACE_BASE_H_
+#define PLACE_BASE_H_
+
+#ifndef Q_MOC_RUN
 #include <tf/tf.h>
 #include <tf_conversions/tf_eigen.h>
 
@@ -19,17 +23,14 @@
 #include<moveit/robot_model/robot_model.h>
 #include<moveit/robot_model/joint_model_group.h>
 #include<moveit/robot_state/robot_state.h>
+#endif
 
 #include<base_placement_plugin/add_robot_base.h>
 
-
 #include <QObject>
 #include <QTimer>
-#include <QtConcurrentRun>
+#include <QtConcurrent>
 #include <QFuture>
-
-#ifndef PLACE_BASE_H_
-#define PLACE_BASE_H_
 
 /*!
  *  \brief     Class for setting up the Base Placement Environment.

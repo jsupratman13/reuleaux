@@ -106,8 +106,10 @@ ros::init(argc, argv, "inverse_workspace");
 
     unsigned char max_depth = 16;
     unsigned char minDepth = 0;
-    float size_of_box = 1.5;
-    float resolution = res;
+    // float size_of_box = 1.5;
+    // float resolution = res;
+    float size_of_box = 1.0;
+    float resolution = 0.08;
     sphere_discretization::SphereDiscretization sd;
 
     octomap::point3d origin = octomap::point3d(0, 0, 0);  // As these map is independent of any task points, it is centered around origin.

@@ -3,7 +3,9 @@
 #define IKFAST_NO_MAIN
 
 #define IK_VERSION 61
-#include "mh5_ikfast.cpp"
+#include "cube_arm_v2_ikfast.cpp"
+// #include "cube_arm_v3_ikfast.cpp"
+// #include "mh5_ikfast.cpp"
 //#include "abb_irb2400_manipulator_ikfast_solver.cpp"
 //#include "ur5_ikfast.cpp"
 

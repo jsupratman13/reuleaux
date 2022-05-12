@@ -578,7 +578,7 @@ void SphereDiscretization::associatePose(std::multimap< std::vector< double >, s
                                          const float resolution)
 {
   unsigned char maxDepth = 16;
-  float size_of_box = 1.5;
+  float size_of_box = 0.8;
   SphereDiscretization sd;
   octomap::point3d origin = octomap::point3d(0, 0, 0);
   octomap::OcTree* tree = sd.generateBoxTree(origin, size_of_box, resolution);

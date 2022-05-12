@@ -1,6 +1,7 @@
 #ifndef base_placement_widget_H_
 #define base_placement_widget_H_
 
+#ifndef Q_MOC_RUN
 #include <tf/transform_datatypes.h>
 #include <ros/ros.h>
 #include <geometry_msgs/Pose.h>
@@ -10,16 +11,17 @@
 #include <yaml-cpp/yaml.h>
 #include <fstream>
 #include <string.h>
+#endif
 
 #include <ui_base_placement_widget.h>
 
 #include <base_placement_plugin/add_way_point.h>
-#include<base_placement_plugin/add_robot_base.h>
+#include <base_placement_plugin/add_robot_base.h>
 
 
 #include <QWidget>
 #include <QTimer>
-#include <QtConcurrentRun>
+#include <QtConcurrent>
 #include <QMainWindow>
 #include <QTreeView>
 #include <QStandardItemModel>
